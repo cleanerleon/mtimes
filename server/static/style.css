@@ -1,0 +1,65 @@
+#body { width: 800px }
+.rating {
+    font-size: 0;
+    display: table;
+}
+
+.rating > label {
+    color: #ddd;
+    float: right;
+}
+
+.rating > label:before {
+    padding: 5px;
+    font-size: 24px;
+    line-height: 1em;
+    display: inline-block;
+    content: "★";
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #FFD700;
+}
+
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+    opacity: 0.5;
+}
+
+.star-rating {
+    unicode-bidi: bidi-override;
+    color: #ddd;
+    font-size: 0;
+    height: 25px;
+    margin: 0 auto;
+    position: relative;
+    display: table;
+    padding: 0;
+    text-shadow: 0px 1px 0 #a2a2a2;
+}
+
+.star-rating span {
+    padding: 5px;
+    font-size: 20px;
+}
+
+.star-rating-top {
+    color: #FFD700;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.star-rating-bottom {
+    padding: 0;
+    display: block;
+    z-index: 0;
+}

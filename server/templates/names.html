@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+    {% include 'meta.html' %}
+</head>
+<body>
+<div class="container">
+
+    {% include 'head.html' %}
+    {% import 'macros.html' as macros %}
+
+    <div class="clearfix">
+
+        {% include 'right.html' %}
+
+        <div style="width:800px; margin:20px 20px 0 0">
+
+                <H1 style="margin-left:120px">{{ name }}目录 {{ pid + 1 }} </H1>
+
+
+            {% for i in range(items|length // 4 + 1) %}
+                <div class="card-deck" style="margin-bottom: 20px">
+                    {% for j in range(4) %}
+                        {% if i * 4 + j < items|length %}
+                            {{ macros.item_card(items[i*4+j], link_name1) }}
+                        {% else %}
+                            <div class="card"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div>
+                <div class="text-left">
+                    {% if pid > 0 %}
+                        <a href="/{{ link_name2 }}/{{ pid - 1 }}">前一页</a>
+                    {% endif %}
+                </div>
+                <div class="text-right">
+                    {%  if items | length == page_size %}
+                        <a href="/{{ link_name2 }}/{{ pid + 1 }}">后一页</a>
+                    {% endif %}
+                </div>
+            </div>
+
+    </div>
+    {% include "foot.html" %}
+</div>
+</body>
+</html>
+

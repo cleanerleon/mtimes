@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MTimes</title>
+    {% include 'meta.html' %}
+</head>
+<body>
+<div class="container">
+
+    {% include 'head.html' %}
+    {% import 'macros.html' as macros %}
+
+    <div class="clearfix">
+
+        {% include 'right.html' %}
+
+        <div style="width:800px; margin:20px 20px 0 0">
+
+            <span>
+                <H1 style="margin-left:120px">电影目录 {{ pid + 1 }} </H1>
+            </span>
+
+
+            {% for i in range(movies|length // 4 + 1) %}
+                <div class="card-deck" style="margin-bottom: 20px">
+                    {% for j in range(4) %}
+                        {% if i * 4 + j < movies|length %}
+                            {{ macros.movie_card(movies[i*4+j]) }}
+                        {% else %}
+                            <div class="card"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div>
+                <div class="text-left">
+                    {% if pid > 0 %}
+                        <a href="/movies/{{ pid - 1 }}">前一页</a>
+                    {% endif %}
+                </div>
+                <div class="text-right">
+                    {%  if movies | length == page_size %}
+                        <a href="/movies/{{ pid + 1 }}">后一页</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% include "foot.html" %}
+</div>
+</body>
+</html>
+

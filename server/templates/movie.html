@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MTimes</title>
+    {% include 'meta.html' %}
+</head>
+<body>
+<div class="container">
+
+    {% include 'head.html' %}
+    {% import 'macros.html' as macros %}
+
+    <div class="clearfix">
+
+        {% include 'right.html' %}
+
+        <div style="margin:20px 20px 0 0">
+
+            <img class="float-left" style="margin-rigth:20px; width:100px; height:100px" src="{{ img_path() }}"/>
+            <H1 style="margin-left:120px">{{ result.name }}</H1>
+            <H2 style="margin-left:120px"> 总评分 {{ result.rating }}
+                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal2">打分
+                </button>
+            </H2>
+
+            <ul>
+                <li>导演：
+                    {% for director in result.directors %}
+                        <a href="/director/{{ director.id }}"> {{ director.name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {% endfor %}
+                </li>
+                <li>主演：
+                    {% for actor in result.actors %}
+                        <a href="/actor/{{ actor.id }}"> {{ actor.name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    {% endfor %}
+                </li>
+                <li>类型：
+                    {% for genre in result.genres %}
+                        {{ genre.name }} &nbsp;&nbsp;
+                    {% endfor %}
+                </li>
+                <li>地区：
+                    {{ result.district }}
+                </li>
+                <li>类型：
+                    {% for genre in result.traits %}
+                        {{ genre.name }} &nbsp;&nbsp;
+                    {% endfor %}
+                </li>
+                <li>
+                    我的评分：
+                    <div class="star-rating">
+                        <div class="star-rating-top" style="width:{{ result.myrating * 10 }}%">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                        <div class="star-rating-bottom">
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                            <span>★</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="modal" id="myModal2">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">请评分</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <form class="form-inline" action="/rating" method="get">
+                            <!-- Modal body -->
+                            <div class="modal-body rating ">
+                                {% for i in range(10, 0, -1) %}
+                                    <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" hidden/>
+                                    <label for="star{{ i }}"></label>
+                                {% endfor %}
+                            </div>
+                            <input type="hidden" value="{{ result.id }}" name="mid"/>
+
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer clearfix">
+                                <button type="submit" class="btn btn-danger float-right">确定</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            {#            <div class="rating">#}
+            {#            #}
+            {#                <input type="radio" id="star5" name="rating" value="5" hidden/>#}
+            {#                <label for="star5"></label>#}
+            {#                <input type="radio" id="star4" name="rating" value="4" hidden/>#}
+            {#                <label for="star4"></label>#}
+            {#                <input type="radio" id="star3" name="rating" value="3" hidden/>#}
+            {#                <label for="star3"></label>#}
+            {#                <input type="radio" id="star2" name="rating" value="2" hidden/>#}
+            {#                <label for="star2"></label>#}
+            {#                <input type="radio" id="star1" name="rating" value="1" hidden/>#}
+            {#                <label for="star1"></label>#}
+            {#            </div>#}
+        </div>
+
+    </div>
+    {% include "foot.html" %}
+</div>
+</body>
+</html>
+
+

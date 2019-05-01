@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MTimes</title>
+    {% include 'meta.html' %}
+</head>
+<body>
+<div class="container">
+
+    {% include 'head.html' %}
+    {% import 'macros.html' as macros %}
+
+    <div class="clearfix">
+
+        {% include 'right.html' %}
+
+        <div style="margin:20px 20px 0 0; width:800px">
+            <span>
+                <img style="margin-rigth:20px; width:100px; height:100px" src="{{ img_path() }}"/>
+                <H1 style="margin-left:120px">{{ result.user.name }}</H1>
+            </span>
+
+            {% for i in range(result.ratings|length // 4 + 1)  %}
+                <div class="card-deck" style="margin-bottom: 20px">
+                    {% for j in range(4) %}
+                        {% if i * 4 + j < result.ratings|length %}
+                            {{ macros.movie_card(result.ratings[i*4+j]) }}
+                            {% else %}
+                            <div class="card"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+    {% include "foot.html" %}
+</div>
+</body>
+</html>
+

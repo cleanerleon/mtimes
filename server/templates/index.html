@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MTimes</title>
+    {% include 'meta.html' %}
+</head>
+<body>
+<div class="container">
+
+    {% include 'head.html' %}
+    {% import 'macros.html' as macros %}
+
+    <div class="clearfix">
+
+    {% include 'right.html' %}
+
+        <div style="margin-right:20px">
+
+            <div class="card" style="margin: 10px 10px 10px 0px">
+                <div class="card-header"><h4>电影</h4></div>
+            </div>
+
+            <div class="card-deck">
+                {% for movie in movies %}
+                    {{ macros.movie_card(movie) }}
+                {% endfor %}
+            </div>
+
+            <div class="card" style="margin: 10px 10px 10px 0px">
+                <div class="card-header"><h4>导演</h4></div>
+            </div>
+            <div class="card-deck">
+                {% for director in directors %}
+                    {{ macros.item_card(director) }}
+                {% endfor %}
+            </div>
+
+            <div class="card" style="margin: 10px 10px 10px 0px">
+                <div class="card-header"><h4>演员</h4></div>
+            </div>
+            <div class="card-deck">
+                {% for actor in actors %}
+                    {{ macros.item_card(actor) }}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    {% include "foot.html" %}
+</div>
+</body>
+</html>

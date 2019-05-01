@@ -1,0 +1,46 @@
+
+
+
+{% macro movie_card(movie) -%}
+    <div class="card">
+        <a href="/movie/{{ movie.id }}" class="card-link">
+            <div class="card-body text-center">
+                <div class="card-title">{{ movie.name }}</div>
+                <p class="card-text">评分 {{ movie.rating }} </p>
+                {% if 'time' in movie %}
+                    <p class="card-text">{{ movie.time.strftime('%Y-%m-%d %H:%m') }} </p>
+                {% endif %}
+            </div>
+            <img class="card-img-bottom"
+                 src="{{ img_path() }}"
+                 alt="Card image">
+        </a>
+    </div>
+{%- endmacro %}
+
+{% macro item_card(item, link_name) -%}
+    <div class="card">
+        <a href="/{{ link_name }}/{{ item.id }}" class="card-link">
+            <div class="card-body text-center">
+                <div class="card-title">{{ item.name }}</div>
+            </div>
+            <img class="card-img-bottom"
+                 src="{{ img_path() }}"
+                 alt="Card image">
+        </a>
+    </div>
+{%- endmacro %}
+
+{% macro detailed_movie_card(movie) -%}
+    <div class="card">
+        <a href="/movie/{{ movie.id }}" class="card-link">
+            <div class="card-body text-center">
+                <div class="card-title">{{ movie.name }}</div>
+                <p class="card-text">{{ movie.rating }} </p>
+            </div>
+            <img class="card-img-bottom"
+                 src="{{ img_path() }}"
+                 alt="Card image">
+        </a>
+    </div>
+{%- endmacro %}

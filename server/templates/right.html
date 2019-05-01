@@ -1,0 +1,7 @@
+<div class="float-right mh-100" style="width: 200px; height: 1000px; margin-left:30px">
+    <div class="card-title"> 推荐电影</div>
+    {% import 'macros.html' as macros %}
+    {% for movie in get_recom_movies() %}
+        {{ macros.movie_card(movie) }}
+    {% endfor %}
+</div>
